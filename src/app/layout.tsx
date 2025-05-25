@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@/assets/styles/globals.css"
 import Providers from "@/providers";
 import Header from "@/components/shared/header";
-import Footer from "@/components/shared/footer";
+import Footer from "@/components/Footer";
 import WrapWholePage from "@/components/shared/layout";
 import { APP_DESCRIPTION, APP_NAME, APP_PUBLIC_SERVER_URL } from "../lib/constants";
 

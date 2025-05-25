@@ -2,7 +2,7 @@ import React from 'react'
 import { LayoutProps } from '../layout'
 import WrapMainContent from '@/components/shared/layout/WrapMainContent'
 
-function Layout({ children }: LayoutProps) {
+function UserLayout({ children }: LayoutProps) {
     return (
         <WrapMainContent>
             {children}
@@ -10,4 +10,4 @@ function Layout({ children }: LayoutProps) {
     )
 }
 
-export default Layout
+export default UserLayout

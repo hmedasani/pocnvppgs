@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button'
+import { User } from 'lucide-react'
 import React from 'react'
 
 function HomePage() {
     return (
         <div>
             Hello from Home Page
-            <Button>Hello Click me</Button>
+            <Button><User /> Hello Click me</Button>
         </div>
     )
 }

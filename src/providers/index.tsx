@@ -1,10 +1,18 @@
 import React from 'react'
 import { LayoutProps } from '@/app/layout'
+import { ThemeProvider } from 'next-themes'
 
 function Providers({ children }: LayoutProps) {
     return (
         <>
-            {children}
+            <ThemeProvider
+                attribute="class"
+                defaultTheme='light'
+                enableSystem
+                disableTransitionOnChange
+            >
+                {children}
+            </ThemeProvider>
         </>
     )
 }

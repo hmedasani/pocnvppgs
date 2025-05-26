@@ -1,11 +1,18 @@
+import ThemeToggle from '@/assets/themes/ThemeToggle'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import { Book, Edit3, ShoppingCart, User } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-function UserNav() {
+interface ClassNameProps {
+    className?: string
+}
+
+function UserNav({ className }: ClassNameProps) {
     return (
-        <nav className='flex gap-2 items-center text-center'>
+        <nav className={cn(`${className} flex gap-2`)}>
+            <ThemeToggle />
             <Button asChild variant="ghost">
                 <Link href={"/cart"}>
                     <ShoppingCart />Cart

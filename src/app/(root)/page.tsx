@@ -2,7 +2,10 @@ import { Button } from '@/components/ui/button'
 import { User } from 'lucide-react'
 import React from 'react'
 
-function HomePage() {
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+async function HomePage() {
+    await delay(3000)
     return (
         <div>
             Hello from Home Page

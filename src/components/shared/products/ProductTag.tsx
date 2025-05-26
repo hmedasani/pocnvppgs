@@ -4,7 +4,7 @@ interface ProductTagProps {
 }
 const ProductTag = ({ price, currency }: ProductTagProps) => {
 
-    const priceAsStringWithFixedFloat = price.toFixed(2);
+    const priceAsStringWithFixedFloat = Number(price).toFixed(2);
 
     const [primePrice, floatPrice] = priceAsStringWithFixedFloat.split(".")
 

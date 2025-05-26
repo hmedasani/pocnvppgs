@@ -1,9 +1,11 @@
+import ProductList from '@/components/shared/products/ProductList'
+import sampleData from '@/db/sample-data'
 import React from 'react'
 
 function ProductsPage() {
     return (
         <div>
-            Products Page
+            <ProductList data={sampleData.products} title='Product List' />
         </div>
     )
 }

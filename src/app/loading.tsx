@@ -24,7 +24,7 @@ const Loading = () => {
                     width={500}
                     height={500}
                 />
-                Loading...
+                <h2 className='text-3xl'>Loading...</h2>
             </div>
 
         </div>

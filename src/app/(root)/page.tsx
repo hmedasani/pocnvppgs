@@ -5,7 +5,7 @@ import React from 'react'
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 async function HomePage() {
-    await delay(3000)
+    await delay(1000)
     return (
         <div>
             Hello from Home Page

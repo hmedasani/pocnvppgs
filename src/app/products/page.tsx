@@ -1,11 +1,13 @@
 import ProductList from '@/components/shared/products/ProductList'
-import sampleData from '@/db/sample-data'
+import { actionGetProductsFromDB } from '@/lib/actions/action.product'
+
 import React from 'react'
 
-function ProductsPage() {
+async function ProductsPage() {
+    const latestProducts = await actionGetProductsFromDB()
     return (
         <div>
-            <ProductList data={sampleData.products} title='Product List' />
+            <ProductList data={latestProducts} title='Product List' />
         </div>
     )
 }

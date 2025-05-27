@@ -1,0 +1,9 @@
+# .eslintignore
+
+# Ignore everything under /src/generated
+src/generated/**
+
+# — or, more narrowly —
+
+# Ignore only the generated Prisma client
+# src/generated/prisma/**

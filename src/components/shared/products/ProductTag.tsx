@@ -1,3 +1,4 @@
+import { Decimal } from '@/generated/prisma/runtime/library';
 interface ProductTagProps {
     price: number;
     currency: string;

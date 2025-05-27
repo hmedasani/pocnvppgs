@@ -103,16 +103,16 @@ Now, you will get an issue with data Types:
 Typescript will not understand Decimal property which is coming from DB.
 so convert it:
 write an Util in lib/util.ts:
----------------begins:convertDbObjToJSObj()----------------
+---------------begins:utilDbObjToJSObj()----------------
 //convert prisma object into a regular JS object
-export function convertDbObjToJSObj<T>(value: T): T{
+export function utilDbObjToJSObj<T>(value: T): T{
 return JSON.parse(JSON.stringify(value))
 }
----------------ends:convertDbObjToJSObj()----------------
+---------------ends:utilDbObjToJSObj()----------------
 add above function in function getLatestProducts(){
 ...
 ...
-return convertDbObjToJSObj(data)
+return utilDbObjToJSObj(data)
 }
 
 now, check the dev:

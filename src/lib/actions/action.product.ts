@@ -8,7 +8,7 @@ export async function actionGetProductsFromDB() {
         take: PRODUCTS_LIMIT,
         orderBy: { createdAt: "desc" }
     })
-    // const d = convertDbObjToJSObj(data);
+    // const d = utilDbObjToJSObj(data);
     const d = data.map((p) => ({
         id: p.id.toString(),
         name: p.name,

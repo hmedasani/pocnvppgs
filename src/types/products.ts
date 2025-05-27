@@ -11,6 +11,7 @@ export type Product = {
     stock: number;
     isFeatured: boolean;
     banner: string | null;
+    createdAt: string;
 };
 
 export type ProductListProps = {

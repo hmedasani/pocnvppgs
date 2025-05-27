@@ -1,0 +1,127 @@
+create db in neon through vercel
+npm i -D prisma @prisma/client
+npx prisma init
+update DATABASE_URL = with neon database_link
+write a product model through schema in Prisma
+same as productType, but this is for PostgreSql:
+--------begins:model-product---------Default
+model Product {
+id Int @id @default(autoincrement())
+name String
+slug String
+category String
+images String[]
+brand String
+description String
+stock Int
+price Decimal @default(0) @db.Decimal(12,2)
+rating Decimal @default(0) @db.Decimal(3,2)
+numReviews Int @default(0)
+isFeatured Boolean @default(false)
+banner String?
+createdAt DateTime @default(now()) @db.Timestamp(6)
+}
+--------ends:model-product---------default
+
+--------begins:model-product---------Custom
+model Product {
+id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+name String
+slug String @unique(map: "product_slug_idx")
+category String
+images String[]
+brand String
+description String
+stock Int
+price Decimal @default(0) @db.Decimal(12, 2)
+rating Decimal @default(0) @db.Decimal(3, 2)
+numReviews Int @default(0)
+isFeatured Boolean @default(false)
+banner String?
+createdAt DateTime @default(now()) @db.Timestamp(6)
+}
+--------ends:model-product---------custom
+
+add post install to package.json/scripts  
+ "postinstall": "prisma generate"
+
+run the command in terminal:
+npx prisma generate
+
+//migrate your schema to DB
+npx prisma migrate dev --name init
+
+now, this will create migration files in your app
+now, check this through postgres studio by this command:
+npx prisma studio
+
+now, seed the sample data:
+create a file named "seed.ts" in the folder "db"
+
+------------begins: seed.ts------------
+async function seedDb() {
+const prisma = new PrismaClient()
+//delete previous unnecessary
+await prisma.product.deleteMany()
+//add product fields into the dab as per our sample data
+//give data source as an array
+// await prisma.product.createMany({ data: sampleDataArray })
+await prisma.product.createMany({ data: sampleData.products })
+console.log("Database seeded successfully!")
+}
+seedDb()
+------------ends: seed.ts------------
+run the command to seed above function to db
+npx tsx [filepath/seed.ts]
+
+again, check in the prisma studio:
+npx prisma studio
+the fields and data will be uploaded
+
+write an action function to fetch the data from db:
+ceate a file in lib/actions/product.action.ts
+
+----------begins:product.action.ts-----------
+export async function getLatestProducts() {
+const prisma = new PrismaClient();
+const data = await prisma.product.findMany({
+take: 4,
+orderBy: { createdAt: "desc" }
+})
+return data;
+}
+----------ends:product.action.ts-----------
+
+mention a vaiable inthe constants aswell as in .env:
+export const PRODUCTS_LIMIT = Number(process.env.PRODUCTS_LIMIT) || 4
+add this PRODUCT_LIMIT in the function getLatestProducts at "take"
+
+update your ProductList component with this getLatestProducts:
+const latestProducts = await getLatestProducts()
+
+Now, you will get an issue with data Types:
+Typescript will not understand Decimal property which is coming from DB.
+so convert it:
+write an Util in lib/util.ts:
+---------------begins:convertDbObjToJSObj()----------------
+//convert prisma object into a regular JS object
+export function convertDbObjToJSObj<T>(value: T): T{
+return JSON.parse(JSON.stringify(value))
+}
+---------------ends:convertDbObjToJSObj()----------------
+add above function in function getLatestProducts(){
+...
+...
+return convertDbObjToJSObj(data)
+}
+
+now, check the dev:
+npm run dev
+
+now, check the build
+npm run build
+
+now, check the start
+npm run start
+
+is everything fine, then better to move forward
